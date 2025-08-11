@@ -25,7 +25,17 @@ const button = document.getElementById('but')
 
 button.onclick = async () => {
   const opened = await bogbot.open(textarea.value)
-  textarea.value = await bogbot.get(opened.substring(13))
+  const obj = {
+    author: textarea.value.substring(0, 44),
+    hash: opened.substring(13),
+    ts: opened.substring(0, 13),
+    content: await bogbot.get(opened.substring(13))
+  }
+  textarea.value = `${obj.author}
+${obj.ts}
+${obj.hash}
+${obj.content}
+  `
 }
 
 </script>
