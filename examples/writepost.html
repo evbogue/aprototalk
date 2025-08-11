@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+    <link rel='stylesheet' href='https://wiredove.net/style.css' type='text/css' />
+    <meta name='viewport' content='width=device-width initial-scale=1' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
+
+<title>Compose an Aproto message</title>
+<body style='margin: 0;'>
+<textarea id='ta'></textarea>
+<button id='but'>Publish</button>
+</body>
+<script type='module'>
+import { bogbot } from 'https://esm.sh/gh/evbogue/bog5@5b22839/bogbot.js'
+
+await bogbot.start('db')
+
+const textarea = document.getElementById('ta')
+const button = document.getElementById('but')
+
+button.onclick = async () => {
+  const msg = await bogbot.compose(textarea.value)
+  console.log(msg)
+  textarea.value = await bogbot.get(msg)
+}
+
+</script>
+</html>
